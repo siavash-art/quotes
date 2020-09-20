@@ -133,5 +133,19 @@ namespace Quotes.Controllers
             }
         }
 
+        public static List<SubscriberModel> subscribersList = new List<SubscriberModel>();
+
+        [Route("Subscribe")]
+        [HttpPost]
+        public IActionResult Subscribe([FromBody] SubscriberModel subscribers)
+        {
+            subscribers.Id = Guid.NewGuid();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            subscribersList.Add(subscribers);
+            return Ok(new { massage = "Успешно подписанны" });
+        }
     }
 }
