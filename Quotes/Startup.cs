@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
 using Quotes.Tasks;
 
 namespace Quotes
@@ -28,6 +29,10 @@ namespace Quotes
             services.AddControllers();
             services.AddHostedService<RemoveQuotesWorker>();
             services.AddHostedService<SendQuotesWorker>();
+            services.AddSwaggerGen(c => 
+            {
+                c.SwaggerDoc(name: "v1", new OpenApiInfo { Title = "QuotesAPI", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,6 +42,13 @@ namespace Quotes
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint(url: "/swagger/v1/swagger.json", name: "QuotesAPI v1");
+            });
 
             app.UseRouting();
 

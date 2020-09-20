@@ -2,10 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>e499a986-b597-4443-8ceb-f78d406a2da0</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="NETCore.MailKit" Version="2.0.3" />
+    <PackageReference Include="Swashbuckle" Version="5.6.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.1" />
   </ItemGroup>
 
 
